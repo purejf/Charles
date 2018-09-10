@@ -32,7 +32,10 @@ class FeedListViewCell_Pic: UIView {
                     if imageRs.count > subviews.count {
                         for _ in 0..<imageRs.count - subviews.count {
                             let image = UIImageView()
+                            image.backgroundColor = UIColor.lightGray
                             image.isUserInteractionEnabled = true
+                            image.layer.masksToBounds = true
+                            image.contentMode = .scaleAspectFill
                             let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapGestHandle(_:)))
                             image.addGestureRecognizer(tap)
                             addSubview(image)
@@ -164,13 +167,14 @@ class FeedListViewCell_Web: UIView {
     lazy var titleL: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 13)
+        label.font = UIFont.systemFont(ofSize: 11)
         label.textColor = UIColor.black
         return label
     }()
     
     lazy var icon: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
         image.layer.cornerRadius = 3.0
         return image
@@ -210,6 +214,7 @@ class FeedListViewCell: UITableViewCell {
         contentView.addSubview(pic)
         contentView.addSubview(video)
         contentView.addSubview(web)
+        contentView.addSubview(locationL)
         contentView.addSubview(timeL)
     }
     
@@ -261,8 +266,19 @@ class FeedListViewCell: UITableViewCell {
                     web.layout = layout.web
                 }
                 
-                timeL.frame = layout.timeR
-                timeL.text = listM.time
+                locationL.isHidden = true
+                if layout.locationR.height > 0 {
+                    locationL.isHidden = false
+                    locationL.frame = layout.locationR
+                    locationL.text = listM.location
+                }
+                
+                timeL.isHidden = true
+                if layout.timeR.height > 0 {
+                    timeL.isHidden = false
+                    timeL.frame = layout.timeR
+                    timeL.text = listM.time
+                }
             }
         }
     }
@@ -281,16 +297,25 @@ class FeedListViewCell: UITableViewCell {
     
     lazy var nameL: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.textColor = UIColor.blue
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = UIColor(hexString: "#4C6C91")
         return label
     }()
     
     lazy var icon: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
         image.layer.cornerRadius = 3.0
         return image
+    }()
+    
+    lazy var locationL: YYLabel = {
+        let label = YYLabel()
+        label.numberOfLines = 1
+        label.textColor = UIColor(hexString: "#4C6C91")
+        label.font = UIFont.systemFont(ofSize: 11)
+        return label
     }()
     
     lazy var contentL: YYLabel = {
@@ -301,8 +326,8 @@ class FeedListViewCell: UITableViewCell {
     
     lazy var openItem: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.textColor = UIColor.blue
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.textColor = UIColor(hexString: "#4C6C91")
         label.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(openItemTapGestHandle))
         label.addGestureRecognizer(tap)
@@ -328,8 +353,8 @@ class FeedListViewCell: UITableViewCell {
     
     lazy var timeL: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.textColor = UIColor.blue
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.textColor = UIColor(hexString: "#747474")
         return label
     }()
 }

@@ -32,5 +32,6 @@ class FeedListModel: NSObject {
     @objc var webUrl: String?
     @objc var webTitle: String?
     
+    @objc var location: String?
     @objc var time: String?
 }

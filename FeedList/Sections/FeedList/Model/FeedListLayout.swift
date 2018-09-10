@@ -39,7 +39,7 @@ class FeedListLayout: NSObject {
     
     private let iconTop: CGFloat = 15.0
     private let iconWH: CGFloat = 44.0
-    private let margin: CGFloat = 10.0
+    private let margin: CGFloat = 7.0
     private let imageCount: Int = 9
     private let imageRow: Int = 3
     
@@ -57,6 +57,7 @@ class FeedListLayout: NSObject {
     @objc var video: FeedListViewLayout_Video?
     @objc var web: FeedListViewLayout_Web?
     
+    @objc var locationR: CGRect = CGRect.zero
     @objc var timeR: CGRect = CGRect.zero
     @objc var height: CGFloat = 0
     
@@ -64,7 +65,7 @@ class FeedListLayout: NSObject {
     
     func layout() {
         guard let listM_ = listM else { return }
-        let nameW: CGFloat = UIScreen.main.bounds.size.width - iconTop - iconWH - margin * 2.0
+        let nameW: CGFloat = UIScreen.main.bounds.size.width - iconTop - iconWH - margin * 3.0
         let nameLeft: CGFloat = iconTop + iconWH + margin
         iconR = CGRect(x: iconTop, y: iconTop, width: iconWH, height: iconWH)
         nameR = CGRect(x: nameLeft, y: iconTop, width: nameW, height: 0)
@@ -77,7 +78,7 @@ class FeedListLayout: NSObject {
         if let content = listM_.content, content.count > 0 {
             let style = NSMutableParagraphStyle()
             style.lineSpacing = 3.0
-            let atts = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
+            let atts = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
                         NSAttributedStringKey.foregroundColor: UIColor.black,
                         NSAttributedStringKey.paragraphStyle: style]
             let contentAttStr = NSMutableAttributedString.init(string: content)
@@ -122,8 +123,8 @@ class FeedListLayout: NSObject {
                 if showOpening {
                     y = openingItemR.maxY + margin
                 }
-                let w = nameW
-                let singleWH = (nameW - CGFloat(imageRow - 1) * margin) / CGFloat(imageRow)
+                let w: CGFloat = UIScreen.main.bounds.width - nameLeft * 2.0
+                let singleWH = (w - CGFloat(imageRow - 1) * margin) / CGFloat(imageRow)
                 var row = images.count / imageRow
                 if images.count % imageRow > 0 {
                     row += 1
@@ -177,20 +178,36 @@ class FeedListLayout: NSObject {
         default:
             break
         }
-        
-        if let pic = pic {
-            timeR = CGRect(x: nameLeft, y: pic.contentR.maxY + margin, width: nameW, height: 20)
-        } else if let video = video {
-            timeR = CGRect(x: nameLeft, y: video.contentR.maxY + margin, width: nameW, height: 20)
-        } else if let web = web {
-            timeR = CGRect(x: nameLeft, y: web.contentR.maxY + margin, width: nameW, height: 20)
+        if let location = listM_.location, location.count > 0 {
+            if let pic = pic {
+                locationR = CGRect(x: nameLeft, y: pic.contentR.maxY + margin, width: nameW, height: 20)
+            } else if let video = video {
+                locationR = CGRect(x: nameLeft, y: video.contentR.maxY + margin, width: nameW, height: 20)
+            } else if let web = web {
+                locationR = CGRect(x: nameLeft, y: web.contentR.maxY + margin, width: nameW, height: 20)
+            } else {
+                var y = contentR.maxY + margin
+                if showOpening {
+                    y = openingItemR.maxY + margin
+                }
+                locationR = CGRect(x: nameLeft, y: y, width: nameW, height: 20)
+            }
         } else {
             var y = contentR.maxY + margin
             if showOpening {
                 y = openingItemR.maxY + margin
             }
-            timeR = CGRect(x: nameLeft, y: y, width: nameW, height: 20)
+            locationR = CGRect(x: nameLeft, y: y, width: nameW, height: 0)
         }
+        var timeY = locationR.maxY;
+        if locationR.height > 0 {
+            timeY += margin
+        }
+        var timeH:CGFloat = 0
+        if let time = listM_.time, time.count > 0 {
+            timeH = 20
+        }
+        timeR = CGRect(x: nameLeft, y: timeY, width: nameW, height: timeH)
         height = timeR.maxY + margin
     }
 }
