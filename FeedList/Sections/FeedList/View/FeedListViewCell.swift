@@ -157,6 +157,10 @@ class FeedListViewCell_Web: UIView {
 
 class FeedListViewCell: UITableViewCell {
     
+    typealias FeedListViewCellItemClickCallBack = (_ cell: FeedListViewCell) -> Void
+    
+    var openItemClickCallBack: FeedListViewCellItemClickCallBack?
+    
     // MARK: - Init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -172,6 +176,7 @@ class FeedListViewCell: UITableViewCell {
         contentView.addSubview(nameL)
         contentView.addSubview(icon)
         contentView.addSubview(contentL)
+        contentView.addSubview(openItem)
         contentView.addSubview(pic)
         contentView.addSubview(video)
         contentView.addSubview(web)
@@ -197,10 +202,26 @@ class FeedListViewCell: UITableViewCell {
                 }
                 
                 contentL.isHidden = true
+                openItem.isHidden = true
+                if let contentLayout = layout.contentLayout {
+                    contentL.isHidden = false
+                    contentL.frame = layout.contentR
+                    contentL.textLayout = contentLayout
+                    if layout.showOpening {
+                        openItem.isHidden = false
+                        openItem.frame = layout.openingItemR
+                    }
+                    if layout.opening {
+                        openItem.text = "收起"
+                    } else {
+                        openItem.text = "展开"
+                    }
+                }
+                
                 if (layout.contentR.height > 0) {
                     contentL.isHidden = false
                     contentL.frame = layout.contentR
-                    contentL.attributedText = layout.contentAttString
+                    contentL.textLayout = layout.contentLayout
                 }
                 
                 pic.isHidden = true
@@ -224,6 +245,17 @@ class FeedListViewCell: UITableViewCell {
         }
     }
     
+    
+    // MARK: - Actions
+    
+    @objc private func openItemTapGestHandle() {
+        if let callBack = openItemClickCallBack, let layout = layout {
+            layout.opening = !layout.opening
+            layout.layout()
+            callBack(self)
+        }
+    }
+    
     // MARK: - Lazy
     lazy var nameL: UILabel = {
         let label = UILabel()
@@ -239,10 +271,19 @@ class FeedListViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var contentL: UILabel = {
-        let label = UILabel()
+    lazy var contentL: YYLabel = {
+        let label = YYLabel()
         label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var openItem: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.blue
+        label.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(openItemTapGestHandle))
+        label.addGestureRecognizer(tap)
         return label
     }()
     

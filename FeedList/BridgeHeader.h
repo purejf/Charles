@@ -11,5 +11,6 @@
 
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
+#import "YYText.h"
 
 #endif /* BridgeHeader_h */

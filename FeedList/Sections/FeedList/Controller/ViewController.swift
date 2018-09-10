@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         for i in 0..<10 {
             let listM = FeedListModel()
             
-            listM.content = "这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？”老师不可置信地心中窃喜，“是发生了什么事吗？”一片鸦雀无声。“来！班长你说！”班长很不好意思地站起来，低着头嗫嚅着：“老，老师你说过‘如果有一天你进教室时发现全班都很安静的话……你就死给我们看……’”（现在的学生都这么皮滴么？？）"
+            listM.content = "这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？”老师不可置信地心中窃喜，“是发生了什么事吗？”一片鸦雀无声。“来！班长你说！”班长很不好意思地站起来，低着头嗫嚅着：“老，老师你说过‘如果有一天你进教室时发现全班都很安静的话……你就死给我们看……’”（现在的学生都这么皮滴么？？）这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？”老师不可置信地心中窃喜，“是发生了什么事吗？”一片鸦雀无声。“来！班长你说！”班长很不好意思地站起来，低着头嗫嚅着：“老，老师你说过‘如果有一天你进教室时发现全班都很安静的话……你就死给我们看……’”（现在的学生都这么皮滴么？？）这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？”老师不可置信地心中窃喜，“是发生了什么事吗？”一片鸦雀无声。“来！班长你说！”班长很不好意思地站起来，低着头嗫嚅着：“老，老师你说过‘如果有一天你进教室时发现全班都很安静的话……你就死给我们看……’”（现在的学生都这么皮滴么？？）这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？”老师不可置信地心中窃喜，“是发生了什么事吗？”一片鸦雀无声。“来！班长你说！”班长很不好意思地站起来，低着头嗫嚅着：“老，老师你说过‘如果有一天你进教室时发现全班都很安静的话……你就死给我们看……’”（现在的学生都这么皮滴么？？）"
             if (i % 4 == 0) {
                 listM.type = FeedListModelType.None.rawValue
             } else if (i % 4 == 1) {
@@ -61,6 +61,7 @@ class ViewController: UIViewController {
             listM.time = "1小时之前"
             let layout = FeedListLayout()
             layout.listM = listM
+            layout.layout()
             layouts.add(layout)
         }
         
@@ -130,6 +131,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell = FeedListViewCell(style: .default, reuseIdentifier: "FeedListViewCell")
         }
         cell!.layout = (layouts[indexPath.row] as! FeedListLayout)
+        weak var self_ = self
+        cell!.openItemClickCallBack = { (cell: FeedListViewCell) in
+            if let self_ = self_ {
+                let offset = self_.tableView.contentOffset
+                self_.tableView.reloadData()
+                self_.tableView.contentOffset = offset
+            }
+        }
         cell!.selectionStyle = .none
         return cell!
     }
