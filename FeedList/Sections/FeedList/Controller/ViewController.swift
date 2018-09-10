@@ -46,10 +46,15 @@ class ViewController: UIViewController {
     
     private func setup() {
         view.addSubview(tableView)
-        view.addSubview(cycleView)
-        cycleView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: cycleH)
-        tableView.contentInset = UIEdgeInsets(top: cycleH, left: 0, bottom: 0, right: 0)
+//        view.addSubview(cycleView)
+//        cycleView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: cycleH)
+//        tableView.contentInset = UIEdgeInsets(top: cycleH, left: 0, bottom: 0, right: 0)
         tableView.frame = view.bounds
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        tableView.frame = view.bounds
     }
     
     private func request() {
@@ -123,8 +128,9 @@ class ViewController: UIViewController {
         table.estimatedSectionFooterHeight = 0
         table.estimatedRowHeight = 0
         table.showsVerticalScrollIndicator = true
-        table.contentInsetAdjustmentBehavior = .never
+        // table.contentInsetAdjustmentBehavior = .never
         table.register(FeedListViewCell.self, forCellReuseIdentifier: "FeedListViewCell")
+        table.tableHeaderView = cycleView
         return table
     }()
 }
@@ -196,19 +202,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 extension ViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+////        return
         let offsetY = scrollView.contentOffset.y
-        
-        if offsetY <= -cycleH {
-            var rect = cycleView.frame
-            rect.origin.y = 0
-            rect.size.height = -offsetY
-            cycleView.frame = rect
-        } else {
-            var rect = cycleView.frame
-            rect.size.height = cycleH
-            rect.origin.y = -(cycleH + offsetY)
-            cycleView.frame = rect
-        }
+////
+//        if offsetY <= -cycleH {
+//            var rect = cycleView.frame
+//            rect.origin.y = 0
+////            rect.size.height = -offsetY
+//            cycleView.frame = rect
+//        } else {
+//            var rect = cycleView.frame
+//            rect.size.height = cycleH
+//            rect.origin.y = -(cycleH + offsetY)
+//            cycleView.frame = rect
+//        }
         
         if offsetY <= -30 {
             lightContent = true
