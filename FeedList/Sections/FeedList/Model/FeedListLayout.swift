@@ -124,11 +124,11 @@ class FeedListLayout: NSObject {
                 }
                 let w = nameW
                 let singleWH = (nameW - CGFloat(imageRow - 1) * margin) / CGFloat(imageRow)
-                let row = (images.count + 1) / imageRow
-                var contentH = singleWH * CGFloat(row)
-                if row > 1 {
-                    contentH += margin * CGFloat(row - 1)
+                var row = images.count / imageRow
+                if images.count % imageRow > 0 {
+                    row += 1
                 }
+                let contentH = singleWH * CGFloat(row) + margin * CGFloat(row - 1) 
                 pic!.contentR = CGRect(x: x, y: y, width: w, height: contentH)
                 let count = images.count > imageCount ? imageCount : images.count;
                 var imageRs_ = [NSValue]()
@@ -150,7 +150,7 @@ class FeedListLayout: NSObject {
                     y = openingItemR.maxY + margin
                 }
                 let w = nameW
-                let h = nameW
+                let h = nameW * 9 / 16
                 video!.contentR = CGRect(x: x, y: y, width: w, height: h)
                 let playWH: CGFloat = 44
                 video!.videoPlayR = CGRect(x: (w - playWH) / CGFloat(2.0), y: (h - playWH) / CGFloat(2.0), width: playWH, height: playWH)

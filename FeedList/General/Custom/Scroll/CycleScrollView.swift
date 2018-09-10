@@ -41,14 +41,13 @@ class CycleScrollView: UIView {
         didSet {
             layout.invalidateLayout()
             collectionView.frame = bounds
-            layout.itemSize = frame.size
+            layout.itemSize = bounds.size
             collectionView.setCollectionViewLayout(layout, animated: false, completion: nil)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layout.itemSize = bounds.size
         collectionView.frame = bounds
         pageControl.frame = CGRect(x: 0, y: bounds.height - 30, width: bounds.width, height: 20)
     }
@@ -101,6 +100,7 @@ class CycleScrollView: UIView {
         col.delegate = self
         col.dataSource = self
         col.scrollsToTop = false
+        col.contentInsetAdjustmentBehavior = .never
         col.register(UICollectionViewCell.self, forCellWithReuseIdentifier: CycleScrollView.cellId)
         return col
     }()

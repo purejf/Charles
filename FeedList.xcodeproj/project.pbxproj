@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00ECBEEB1F22BB5C767C0644 /* libPods-FeedList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4C31582053B110C7D859D /* libPods-FeedList.a */; };
+		5661D4DC214652C00066BA57 /* YYPhotoGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5661D4DA214652C00066BA57 /* YYPhotoGroupView.m */; };
+		5661D4DE21465C630066BA57 /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5661D4DD21465C630066BA57 /* UIView+Add.swift */; };
 		56BB357A214229AC00548C07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB3579214229AC00548C07 /* AppDelegate.swift */; };
 		56BB357C214229AC00548C07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB357B214229AC00548C07 /* ViewController.swift */; };
 		56BB357F214229AC00548C07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56BB357D214229AC00548C07 /* Main.storyboard */; };
@@ -19,7 +21,6 @@
 		56BB35AA21422CBE00548C07 /* FeedListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB35A921422CBE00548C07 /* FeedListModel.swift */; };
 		56BB35AC21422D0E00548C07 /* FeedListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB35AB21422D0E00548C07 /* FeedListLayout.swift */; };
 		56BB35B921426ABE00548C07 /* CycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB35B821426ABE00548C07 /* CycleScrollView.swift */; };
-		56BB35BC2142744200548C07 /* 1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB35BB2142744200548C07 /* 1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,9 @@
 
 /* Begin PBXFileReference section */
 		02464F36B9388693981A3456 /* Pods-FeedList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedList.release.xcconfig"; path = "Target Support Files/Pods-FeedList/Pods-FeedList.release.xcconfig"; sourceTree = "<group>"; };
+		5661D4DA214652C00066BA57 /* YYPhotoGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYPhotoGroupView.m; sourceTree = "<group>"; };
+		5661D4DB214652C00066BA57 /* YYPhotoGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYPhotoGroupView.h; sourceTree = "<group>"; };
+		5661D4DD21465C630066BA57 /* UIView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Add.swift"; sourceTree = "<group>"; };
 		56BB3576214229AC00548C07 /* FeedList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56BB3579214229AC00548C07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56BB357B214229AC00548C07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,7 +63,6 @@
 		56BB35AB21422D0E00548C07 /* FeedListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListLayout.swift; sourceTree = "<group>"; };
 		56BB35AD21425FB200548C07 /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
 		56BB35B821426ABE00548C07 /* CycleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleScrollView.swift; sourceTree = "<group>"; };
-		56BB35BB2142744200548C07 /* 1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 1.swift; sourceTree = "<group>"; };
 		E4F4C31582053B110C7D859D /* libPods-FeedList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FeedList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD63CF2EB03944062D6E5930 /* Pods-FeedList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedList.debug.xcconfig"; path = "Target Support Files/Pods-FeedList/Pods-FeedList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +93,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5661D471214650E70066BA57 /* Venders */ = {
+			isa = PBXGroup;
+			children = (
+				5661D4D9214652A80066BA57 /* YYPhotoBrowser */,
+			);
+			path = Venders;
+			sourceTree = "<group>";
+		};
+		5661D4D9214652A80066BA57 /* YYPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				5661D4DB214652C00066BA57 /* YYPhotoGroupView.h */,
+				5661D4DA214652C00066BA57 /* YYPhotoGroupView.m */,
+			);
+			path = YYPhotoBrowser;
+			sourceTree = "<group>";
+		};
 		56BB356D214229AC00548C07 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +135,7 @@
 		56BB3578214229AC00548C07 /* FeedList */ = {
 			isa = PBXGroup;
 			children = (
+				5661D471214650E70066BA57 /* Venders */,
 				56BB35B521426A6F00548C07 /* General */,
 				56BB35AF214267E000548C07 /* Application */,
 				56BB35AE214267DA00548C07 /* Sections */,
@@ -232,7 +253,7 @@
 		56BB35BA2142743100548C07 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				56BB35BB2142744200548C07 /* 1.swift */,
+				5661D4DD21465C630066BA57 /* UIView+Add.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -411,12 +432,14 @@
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
+				"${PODS_ROOT}/ZFPlayer/ZFPlayer/Classes/ControlView/ZFPlayer.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKPromptResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZFPlayer.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -430,7 +453,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56BB35BC2142744200548C07 /* 1.swift in Sources */,
+				5661D4DE21465C630066BA57 /* UIView+Add.swift in Sources */,
+				5661D4DC214652C00066BA57 /* YYPhotoGroupView.m in Sources */,
 				56BB35A821422AF500548C07 /* FeedListViewCell.swift in Sources */,
 				56BB357C214229AC00548C07 /* ViewController.swift in Sources */,
 				56BB35B921426ABE00548C07 /* CycleScrollView.swift in Sources */,

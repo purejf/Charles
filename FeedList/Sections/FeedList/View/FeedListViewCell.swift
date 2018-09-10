@@ -65,10 +65,12 @@ class FeedListViewCell_Pic: UIView {
 
 class FeedListViewCell_Video: UIView {
     
+    weak var cell: FeedListViewCell?
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: frame) 
         setup()
     }
     
@@ -95,11 +97,18 @@ class FeedListViewCell_Video: UIView {
         }
     }
     
+    @objc private func playItemTapGestHandle() {
+        if let cell = cell, let videoItemClickCallBack = cell.videoItemClickCallBack {
+            videoItemClickCallBack(cell)
+        }
+    }
+    
     // MARK: - Lazy
     
     lazy var cover: UIImageView = {
         let image = UIImageView()
         image.layer.masksToBounds = true
+        image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -107,6 +116,9 @@ class FeedListViewCell_Video: UIView {
         let image = UIImageView()
         image.layer.masksToBounds = true
         image.image = UIImage(named: "video_play")
+        image.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(playItemTapGestHandle))
+        image.addGestureRecognizer(tap)
         return image
     }()
 }
@@ -170,9 +182,11 @@ class FeedListViewCell_Web: UIView {
 class FeedListViewCell: UITableViewCell {
     
     typealias FeedListViewCellItemClickCallBack = (_ cell: FeedListViewCell) -> Void
-    var openItemClickCallBack: FeedListViewCellItemClickCallBack?
-    
     typealias FeedListViewCellPicItemClickCallBack = (_ cell: FeedListViewCell, _ pic: UIImageView, _ index: Int) -> Void
+    
+    var openItemClickCallBack: FeedListViewCellItemClickCallBack?
+    var videoItemClickCallBack: FeedListViewCellItemClickCallBack?
+    
     var picItemClickCallBack: FeedListViewCellPicItemClickCallBack?
     
     // MARK: - Init
@@ -180,6 +194,7 @@ class FeedListViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(hue:0.00, saturation:0.00, brightness:0.96, alpha:1.00)
+        selectionStyle = .none
         setup()
     }
     
@@ -296,11 +311,13 @@ class FeedListViewCell: UITableViewCell {
     
     lazy var pic: FeedListViewCell_Pic = {
         let pic = FeedListViewCell_Pic()
+        pic.cell = self
         return pic
     }()
     
     lazy var video: FeedListViewCell_Video = {
         let video = FeedListViewCell_Video()
+        video.cell = self
         return video
     }()
     

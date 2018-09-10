@@ -48,6 +48,16 @@ PODS:
   - YYImage/Core (1.0.4)
   - YYModel (1.0.4)
   - YYText (1.0.7)
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
+  - ZFPlayer (3.1.6):
+    - ZFPlayer/Core (= 3.1.6)
+  - ZFPlayer/AVPlayer (3.1.6):
+    - ZFPlayer/Core
+  - ZFPlayer/ControlView (3.1.6):
+    - ZFPlayer/Core
+  - ZFPlayer/Core (3.1.6)
 
 DEPENDENCIES:
   - AFNetworking
@@ -71,6 +81,10 @@ DEPENDENCIES:
   - YYImage
   - YYModel
   - YYText
+  - YYWebImage
+  - ZFPlayer
+  - ZFPlayer/AVPlayer
+  - ZFPlayer/ControlView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -93,6 +107,8 @@ SPEC REPOS:
     - YYImage
     - YYModel
     - YYText
+    - YYWebImage
+    - ZFPlayer
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -114,7 +130,9 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
+  ZFPlayer: bac23889b25e83fd3644ec40c8e7e9622e331ecb
 
-PODFILE CHECKSUM: a421defc2619131253b217289a4d7f787a89ef6c
+PODFILE CHECKSUM: c3ab42e24e9c245d521925b56a8de4e8df5db225
 
 COCOAPODS: 1.6.0.beta.1
