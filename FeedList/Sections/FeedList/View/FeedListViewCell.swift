@@ -9,19 +9,35 @@
 import UIKit
 
 // MARK: -
+
 class FeedListViewCell_Pic: UIView {
+    
+    weak var cell: FeedListViewCell?
+    
+    @objc private func imageTapGestHandle(_ tap: UITapGestureRecognizer) {
+        if let tapView = tap.view {
+            let index = subviews.index(of: tapView)
+            if let cell = cell, let callBack = cell.picItemClickCallBack {
+                callBack(cell, tapView as! UIImageView, index!)
+            }
+        }
+    }
+    
     @objc var layout: FeedListViewLayout_Pic? {
         didSet {
             if let layout = layout, let listM = layout.listM, let imageRs = layout.imageRs, let images = listM.images {
-                if (imageRs.count > 0 && images.count >= imageRs.count) {
+                if imageRs.count > 0 && images.count >= imageRs.count {
                     isHidden = false
                     frame = layout.contentR
-                    if (imageRs.count > subviews.count) {
+                    if imageRs.count > subviews.count {
                         for _ in 0..<imageRs.count - subviews.count {
                             let image = UIImageView()
+                            image.isUserInteractionEnabled = true
+                            let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapGestHandle(_:)))
+                            image.addGestureRecognizer(tap)
                             addSubview(image)
                         }
-                    } else if (imageRs.count < subviews.count) {
+                    } else if imageRs.count < subviews.count {
                         for i in 0..<subviews.count - imageRs.count {
                             let image = subviews[i]
                             image.isHidden = true
@@ -32,9 +48,7 @@ class FeedListViewCell_Pic: UIView {
                         image.isHidden = false
                         let rect = imageRs[i].cgRectValue
                         image.frame = rect
-                        guard let url = URL(string: images[i]) else {
-                            continue
-                        }
+                        let url = URL(string: images[i])
                         image.sd_setImage(with: url, placeholderImage: nil, options: .retryFailed, completed: nil)
                     }
                 } else {
@@ -43,16 +57,16 @@ class FeedListViewCell_Pic: UIView {
             } else {
                 isHidden = true
             }
-            
-            
         }
     }
 }
 
 // MARK: -
+
 class FeedListViewCell_Video: UIView {
     
     // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -73,11 +87,8 @@ class FeedListViewCell_Video: UIView {
                 frame = layout.contentR
                 cover.frame = bounds
                 playItem.frame = layout.videoPlayR
-                
                 if let videoCover = listM.videoCover {
-                    guard let url = URL(string: videoCover) else {
-                        return
-                    }
+                    let url = URL(string: videoCover)
                     cover.sd_setImage(with: url, placeholderImage: nil, options: .retryFailed, completed: nil)
                 }
             }
@@ -85,6 +96,7 @@ class FeedListViewCell_Video: UIView {
     }
     
     // MARK: - Lazy
+    
     lazy var cover: UIImageView = {
         let image = UIImageView()
         image.layer.masksToBounds = true
@@ -100,9 +112,11 @@ class FeedListViewCell_Video: UIView {
 }
 
 // MARK: -
+
 class FeedListViewCell_Web: UIView {
     
     // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -124,11 +138,9 @@ class FeedListViewCell_Web: UIView {
                 frame = layout.contentR
                 icon.frame = layout.webIconR
                 titleL.frame = layout.webTitleR
-                titleL.text = layout.listM?.webTitle
+                titleL.text = listM.webTitle
                 if let iconUrl = listM.webIcon {
-                    guard let url = URL(string: iconUrl) else {
-                        return
-                    }
+                    let url = URL(string: iconUrl)
                     icon.sd_setImage(with: url, placeholderImage: nil, options: .retryFailed, completed: nil)
                 }
             }
@@ -136,6 +148,7 @@ class FeedListViewCell_Web: UIView {
     }
     
     // MARK: - Lazy
+    
     lazy var titleL: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -150,7 +163,6 @@ class FeedListViewCell_Web: UIView {
         image.layer.cornerRadius = 3.0
         return image
     }()
-    
 }
 
 // MARK: -
@@ -158,10 +170,13 @@ class FeedListViewCell_Web: UIView {
 class FeedListViewCell: UITableViewCell {
     
     typealias FeedListViewCellItemClickCallBack = (_ cell: FeedListViewCell) -> Void
-    
     var openItemClickCallBack: FeedListViewCellItemClickCallBack?
     
+    typealias FeedListViewCellPicItemClickCallBack = (_ cell: FeedListViewCell, _ pic: UIImageView, _ index: Int) -> Void
+    var picItemClickCallBack: FeedListViewCellPicItemClickCallBack?
+    
     // MARK: - Init
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(hue:0.00, saturation:0.00, brightness:0.96, alpha:1.00)
@@ -188,14 +203,12 @@ class FeedListViewCell: UITableViewCell {
             if let layout = layout, let listM = layout.listM {
                 icon.frame = layout.iconR
                 if let iconUrl = listM.icon {
-                    guard let url = URL(string: iconUrl) else {
-                        return
-                    }
+                    let url = URL(string: iconUrl)
                     icon.sd_setImage(with: url, placeholderImage: nil, options: .retryFailed, completed: nil)
                 }
                 // 设置url
                 nameL.isHidden = true
-                if (layout.nameR.height > 0) {
+                if layout.nameR.height > 0 {
                     nameL.isHidden = false
                     nameL.frame = layout.nameR
                     nameL.text = listM.name
@@ -218,23 +231,17 @@ class FeedListViewCell: UITableViewCell {
                     }
                 }
                 
-                if (layout.contentR.height > 0) {
-                    contentL.isHidden = false
-                    contentL.frame = layout.contentR
-                    contentL.textLayout = layout.contentLayout
-                }
-                
                 pic.isHidden = true
                 video.isHidden = true
                 web.isHidden = true
                 
-                if (listM.type == FeedListModelType.Pic.rawValue && layout.pic != nil) {
+                if listM.type == FeedListModelType.Pic.rawValue && layout.pic != nil {
                     pic.isHidden = false
                     pic.layout = layout.pic
-                } else if (listM.type == FeedListModelType.Video.rawValue && layout.video != nil) {
+                } else if listM.type == FeedListModelType.Video.rawValue && layout.video != nil {
                     video.isHidden = false
                     video.layout = layout.video
-                } else if (listM.type == FeedListModelType.Web.rawValue && layout.web != nil) {
+                } else if listM.type == FeedListModelType.Web.rawValue && layout.web != nil {
                     web.isHidden = false
                     web.layout = layout.web
                 }
@@ -244,7 +251,6 @@ class FeedListViewCell: UITableViewCell {
             }
         }
     }
-    
     
     // MARK: - Actions
     
@@ -257,6 +263,7 @@ class FeedListViewCell: UITableViewCell {
     }
     
     // MARK: - Lazy
+    
     lazy var nameL: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
@@ -308,6 +315,5 @@ class FeedListViewCell: UITableViewCell {
         label.textColor = UIColor.blue
         return label
     }()
-    
 }
 

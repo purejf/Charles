@@ -13,7 +13,7 @@ class CycleScrollView: UIView {
     static let cellId = "cellId"
     @objc var timeInterval: TimeInterval = 4.0
     @objc var timer: Timer?
-    @objc var index: Int = 0
+    private var index: Int = 0
     var images: [String] = [String]() {
         didSet {
             if images.count == 0 {
@@ -68,8 +68,11 @@ class CycleScrollView: UIView {
     
     private func startTimer() {
         removeTimer()
+        weak var self_ = self
         timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true, block: { (timer) in
-            self.scroll()
+            if let self_ = self_ {
+                self_.scroll()
+            }
         })
         RunLoop.current.add(timer!, forMode: .commonModes)
     }
@@ -140,9 +143,7 @@ extension CycleScrollView: UICollectionViewDataSource, UICollectionViewDelegateF
             }
         }
 
-        guard let url = URL(string: images[indexPath.row % images.count]) else {
-            return cell
-        }
+        let url = URL(string: images[indexPath.row % images.count])
         image!.sd_setImage(with: url, completed: nil)
         return cell
     }
