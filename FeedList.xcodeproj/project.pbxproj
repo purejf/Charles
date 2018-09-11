@@ -656,7 +656,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SunLands.com.FeedList;
+				PRODUCT_BUNDLE_IDENTIFIER = com.charles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/FeedList/BridgeHeader.h";
 				SWIFT_VERSION = 4.0;
@@ -676,7 +676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = SunLands.com.FeedList;
+				PRODUCT_BUNDLE_IDENTIFIER = com.charles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/FeedList/BridgeHeader.h";
 				SWIFT_VERSION = 4.0;
