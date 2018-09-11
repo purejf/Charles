@@ -44,7 +44,8 @@ class ViewController: UIViewController {
         }
     }
     
-    private func setup() {
+    private func setup() { 
+        view.backgroundColor = UIColor(hue:0.00, saturation:0.00, brightness:0.96, alpha:1.00)
         view.addSubview(tableView)
         view.addSubview(cycleView)
         cycleView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: cycleH)
@@ -56,7 +57,7 @@ class ViewController: UIViewController {
         DispatchQueue.global().async {
             for i in 0..<10 {
                 let listM = FeedListModel()
-                listM.content = " 苹果小贴士：如果你用苹果的触控板，看到任何你不认识的字，可以轻易的三指点按－就可以看到解说（词典或维基百科）。在这个示范可以看出这个功能还相当智能，我点选的是英文字，但它不止帮我找到了答案，还选择了中文！在 iPhone 上要多指点按并不精确，这也可能就是 Force Touch 的切入点。"
+                listM.content = " www.baidu.com苹果小贴士：#主题#如果你用苹果的触控板，看到任何你不认识的字，可以轻易的三指点按－就可以看到解说（词典或维基百科）。在这个示范可以看出这个功能还相当智能，我点选的是英文字，但它不止帮我找到了答案，还选择了中文！在 iPhone 上要多指点按并不精确，这也可能就是 Force Touch 的切入点。"
                 if i % 4 == 0 {
                     listM.type = FeedListModelType.Pic.rawValue
                 } else if i % 4 == 1 {
@@ -70,7 +71,7 @@ class ViewController: UIViewController {
                 }
                 listM.icon = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1027424821,3039895114&fm=26&gp=0.jpg"
                 listM.name = "Kobe Bryant"
-                listM.videoCover = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2448336203,2417907154&fm=26&gp=0.jpg"
+                listM.videoCover = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537184698&di=5c791f7577a3241d1b32c95c2c0e945a&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.zsnews.cn%2Fdata%2Fphoto%2FBackup%2F2014%2F10%2F14%2Ftw_201410149272178967.jpg"
                 listM.images = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537184698&di=5c791f7577a3241d1b32c95c2c0e945a&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.zsnews.cn%2Fdata%2Fphoto%2FBackup%2F2014%2F10%2F14%2Ftw_201410149272178967.jpg",
                                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536589999056&di=54ae77e20512b0b0d89223e361193dd2&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2F11%2F1125%2F112523%2F11252316_1200x1000_0.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536589830016&di=2c8ffa32dcba56ff91d7b2640bf81f51&imgtype=0&src=http%3A%2F%2Fimg.zybus.com%2Fuploads%2Fallimg%2F140704%2F1-140F4145036.jpg",
                                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536589830015&di=3313f8487b63f8add1f6b4d54e71e636&imgtype=0&src=http%3A%2F%2Fpic11.photophoto.cn%2F20090525%2F0036036395846248_b.jpg",

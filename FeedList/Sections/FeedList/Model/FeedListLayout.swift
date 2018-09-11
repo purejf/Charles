@@ -82,7 +82,56 @@ class FeedListLayout: NSObject {
                         NSAttributedStringKey.foregroundColor: UIColor.black,
                         NSAttributedStringKey.paragraphStyle: style]
             let contentAttStr = NSMutableAttributedString.init(string: content)
-            contentAttStr.addAttributes(atts, range: NSMakeRange(0, content.count))
+            contentAttStr.addAttributes(atts, range: contentAttStr.yy_rangeOfAll())
+            
+            let highlightBorder = YYTextBorder()
+            highlightBorder.insets = UIEdgeInsets(top: -2, left: 0, bottom: -2, right: 0)
+            highlightBorder.cornerRadius = 3
+            highlightBorder.fillColor = UIColor(hexString: "#bfdffe")
+            
+            // topic
+            if let regular = RegularExpressionHelper.topicRegular() {
+                let results:[NSTextCheckingResult] = regular.matches(in: contentAttStr.string,
+                                                                     options: NSRegularExpression.MatchingOptions.withTransparentBounds,
+                                                                     range: contentAttStr.yy_rangeOfAll())
+                
+                for i in 0..<results.count {
+                    let result = results[i]
+                    let resultRange = result.range
+                    if resultRange.location == NSNotFound && resultRange.length <= 1 {
+                        continue
+                    }
+                    if contentAttStr.yy_attribute(YYTextHighlightAttributeName, at: UInt(resultRange.location)) == nil {
+                        contentAttStr.yy_setColor(UIColor(hexString: "#007FCA"), range: resultRange)
+                        let highlight = YYTextHighlight()
+                        highlight.setBorder(highlightBorder)
+                        highlight.userInfo = ["topic": contentAttStr.attributedSubstring(from: result.range).string]
+                        contentAttStr.yy_setTextHighlight(highlight, range: result.range)
+                    }
+                }
+            }
+            
+            // http
+            if let regular = RegularExpressionHelper.httpRegular() {
+                let results:[NSTextCheckingResult] = regular.matches(in: contentAttStr.string,
+                                                                     options: NSRegularExpression.MatchingOptions.withTransparentBounds,
+                                                                     range: contentAttStr.yy_rangeOfAll())
+                
+                for i in 0..<results.count {
+                    let result = results[i]
+                    let resultRange = result.range
+                    if resultRange.location == NSNotFound && resultRange.length <= 1 {
+                        continue
+                    }
+                    if contentAttStr.yy_attribute(YYTextHighlightAttributeName, at: UInt(resultRange.location)) == nil {
+                        contentAttStr.yy_setColor(UIColor(hexString: "#007FCA"), range: resultRange)
+                        let highlight = YYTextHighlight()
+                        highlight.setBorder(highlightBorder)
+                        highlight.userInfo = ["http": contentAttStr.attributedSubstring(from: result.range).string]
+                        contentAttStr.yy_setTextHighlight(highlight, range: result.range)
+                    }
+                }
+            }
             
             // layout
             let container = YYTextContainer(size: CGSize(width: nameW, height: CGFloat(MAXFLOAT)))
@@ -107,7 +156,7 @@ class FeedListLayout: NSObject {
                 let w: CGFloat = 30
                 let h: CGFloat = 18
                 openingItemR = CGRect(x: x, y: y, width: w, height: h)
-            }
+            } 
         }
         pic = nil
         video = nil

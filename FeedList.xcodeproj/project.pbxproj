@@ -10,6 +10,8 @@
 		00ECBEEB1F22BB5C767C0644 /* libPods-FeedList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F4C31582053B110C7D859D /* libPods-FeedList.a */; };
 		5661D4DC214652C00066BA57 /* YYPhotoGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5661D4DA214652C00066BA57 /* YYPhotoGroupView.m */; };
 		5661D4DE21465C630066BA57 /* UIView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5661D4DD21465C630066BA57 /* UIView+Add.swift */; };
+		56978C682147686200E48316 /* RegularExpressionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56978C672147686200E48316 /* RegularExpressionHelper.swift */; };
+		56978C6A21476D8400E48316 /* EmoticonQQ.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56978C6921476D8300E48316 /* EmoticonQQ.bundle */; };
 		56BB357A214229AC00548C07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB3579214229AC00548C07 /* AppDelegate.swift */; };
 		56BB357C214229AC00548C07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB357B214229AC00548C07 /* ViewController.swift */; };
 		56BB357F214229AC00548C07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56BB357D214229AC00548C07 /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 		5661D4DA214652C00066BA57 /* YYPhotoGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYPhotoGroupView.m; sourceTree = "<group>"; };
 		5661D4DB214652C00066BA57 /* YYPhotoGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYPhotoGroupView.h; sourceTree = "<group>"; };
 		5661D4DD21465C630066BA57 /* UIView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Add.swift"; sourceTree = "<group>"; };
+		56978C672147686200E48316 /* RegularExpressionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionHelper.swift; sourceTree = "<group>"; };
+		56978C6921476D8300E48316 /* EmoticonQQ.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EmoticonQQ.bundle; sourceTree = "<group>"; };
 		56BB3576214229AC00548C07 /* FeedList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56BB3579214229AC00548C07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56BB357B214229AC00548C07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +112,14 @@
 				5661D4DA214652C00066BA57 /* YYPhotoGroupView.m */,
 			);
 			path = YYPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		56978C662147684C00E48316 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				56978C672147686200E48316 /* RegularExpressionHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		56BB356D214229AC00548C07 = {
@@ -191,6 +203,7 @@
 		56BB35B12142680000548C07 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				56978C6921476D8300E48316 /* EmoticonQQ.bundle */,
 				56BB357D214229AC00548C07 /* Main.storyboard */,
 				56BB3580214229AD00548C07 /* Assets.xcassets */,
 				56BB3582214229AD00548C07 /* LaunchScreen.storyboard */,
@@ -228,6 +241,7 @@
 		56BB35B521426A6F00548C07 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				56978C662147684C00E48316 /* Helper */,
 				56BB35BA2142743100548C07 /* Extension */,
 				56BB35B621426A7600548C07 /* Custom */,
 			);
@@ -382,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56BB3584214229AD00548C07 /* LaunchScreen.storyboard in Resources */,
+				56978C6A21476D8400E48316 /* EmoticonQQ.bundle in Resources */,
 				56BB3581214229AD00548C07 /* Assets.xcassets in Resources */,
 				56BB357F214229AC00548C07 /* Main.storyboard in Resources */,
 			);
@@ -453,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56978C682147686200E48316 /* RegularExpressionHelper.swift in Sources */,
 				5661D4DE21465C630066BA57 /* UIView+Add.swift in Sources */,
 				5661D4DC214652C00066BA57 /* YYPhotoGroupView.m in Sources */,
 				56BB35A821422AF500548C07 /* FeedListViewCell.swift in Sources */,
