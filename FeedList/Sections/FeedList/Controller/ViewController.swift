@@ -8,7 +8,7 @@
 
 import UIKit
 
-let cycleH: CGFloat = 300
+let cycleH: CGFloat = 320
 
 class ViewController: UIViewController {
     
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
                     listM.content = "这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！"
                 } else if i % 4 == 2 {
                     listM.type = FeedListModelType.Video.rawValue
-                    listM.content = "这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？”"
+                    listM.content = "这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？这天，老师如往常一样对着闹哄哄的班上大吼叫：“不——要——吵——啦！大家安静一点好不好？！”全班没人理他，老师一气之下甩头就走，准备到校长那告状。当校长和老师两人怒气冲冲回到教室，正想开骂时，不料竟发现班上同学安安静静地坐着。“怎么啦？大家怎么变得这么乖？"
                 } else if i % 4 == 3 {
                     listM.type = FeedListModelType.Web.rawValue
                 }
@@ -149,6 +149,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             let offset = self_.tableView.contentOffset
             self_.tableView.reloadData()
             self_.tableView.contentOffset = offset
+        }
+        cell.webItemClickCallBack = { (cell: FeedListViewCell) in
+            /// 
         }
         cell.picItemClickCallBack = { (cell: FeedListViewCell, pic: UIImageView, index: Int) in
             guard let self_ = self_ else { return }

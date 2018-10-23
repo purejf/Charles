@@ -131,7 +131,7 @@ extension CycleScrollView: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CycleScrollView.cellId, for: indexPath)
-        cell.backgroundColor = UIColor.red
+        cell.backgroundColor = UIColor.lightGray
         var image = cell.contentView.viewWithTag(101) as? UIImageView
         if image == nil {
             image = UIImageView()

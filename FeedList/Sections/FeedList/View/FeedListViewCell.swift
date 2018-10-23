@@ -190,6 +190,7 @@ class FeedListViewCell: UITableViewCell {
     
     var openItemClickCallBack: FeedListViewCellItemClickCallBack?
     var videoItemClickCallBack: FeedListViewCellItemClickCallBack?
+    var webItemClickCallBack: FeedListViewCellItemClickCallBack?
     
     var picItemClickCallBack: FeedListViewCellPicItemClickCallBack?
     
@@ -292,6 +293,12 @@ class FeedListViewCell: UITableViewCell {
         }
     }
     
+    @objc private func webItemTapGestHandle() {
+        if let callBack = webItemClickCallBack {
+            callBack(self)
+        }
+    }
+    
     // MARK: - Lazy
     
     lazy var nameL: UILabel = {
@@ -347,6 +354,9 @@ class FeedListViewCell: UITableViewCell {
     
     lazy var web: FeedListViewCell_Web = {
         let web = FeedListViewCell_Web()
+        web.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(webItemTapGestHandle))
+        web.addGestureRecognizer(tap)
         return web
     }()
     
