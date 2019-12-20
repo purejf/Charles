@@ -9,10 +9,8 @@
 import UIKit
 
 class CycleScrollView: UIView {
-    
     static let cellId = "cellId"
-    
-    
+
     @objc var timeInterval: TimeInterval = 4.0
     @objc var timer: Timer?
     private var index: Int = 0
@@ -28,17 +26,17 @@ class CycleScrollView: UIView {
             startTimer()
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(collectionView)
         addSubview(pageControl)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override var frame: CGRect {
         didSet {
             layout.invalidateLayout()
@@ -47,15 +45,15 @@ class CycleScrollView: UIView {
             collectionView.setCollectionViewLayout(layout, animated: false, completion: nil)
         }
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = bounds
         pageControl.frame = CGRect(x: 0, y: bounds.height - 30, width: bounds.width, height: 20)
     }
-    
+
     // MARK: - Timer
-    
+
     private func scroll() {
         var index: Int = Int((collectionView.contentOffset.x + collectionView.bounds.width * 0.5) / collectionView.bounds.width)
         index += 1
@@ -66,25 +64,25 @@ class CycleScrollView: UIView {
             collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .right, animated: true)
         }
     }
-    
+
     private func startTimer() {
         removeTimer()
         weak var self_ = self
-        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true, block: { (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true, block: { _ in
             if let self_ = self_ {
                 self_.scroll()
             }
         })
         RunLoop.current.add(timer!, forMode: .commonModes)
     }
-   
+
     private func removeTimer() {
         timer?.invalidate()
         timer = nil
     }
-    
+
     // MARK: - Lazy
-    
+
     lazy var pageControl: UIPageControl = {
         let control = UIPageControl()
         control.currentPage = 0
@@ -92,7 +90,7 @@ class CycleScrollView: UIView {
         control.currentPageIndicatorTintColor = UIColor.red
         return control
     }()
-    
+
     lazy var collectionView: UICollectionView = {
         let col = UICollectionView(frame: bounds, collectionViewLayout: layout)
         col.backgroundColor = UIColor.green
@@ -106,8 +104,7 @@ class CycleScrollView: UIView {
         col.register(UICollectionViewCell.self, forCellWithReuseIdentifier: CycleScrollView.cellId)
         return col
     }()
-    
-    
+
     lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -116,21 +113,19 @@ class CycleScrollView: UIView {
         layout.scrollDirection = .horizontal
         return layout
     }()
-    
 }
 
 // MARK: - DataSource, Delegate
 
 extension CycleScrollView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return images.count * 1000
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CycleScrollView.cellId, for: indexPath)
         cell.backgroundColor = UIColor.lightGray
@@ -140,7 +135,7 @@ extension CycleScrollView: UICollectionViewDataSource, UICollectionViewDelegateF
             cell.contentView.addSubview(image!)
             cell.contentView.clipsToBounds = true
             image!.contentMode = .scaleAspectFill
-            image!.mas_makeConstraints { (maker) in
+            image!.mas_makeConstraints { maker in
                 maker!.edges.mas_equalTo()(0)
             }
         }
@@ -149,26 +144,24 @@ extension CycleScrollView: UICollectionViewDataSource, UICollectionViewDelegateF
         image!.sd_setImage(with: url, completed: nil)
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return collectionView.bounds.size
     }
 }
 
 extension CycleScrollView {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_: UIScrollView) {
         var index: Int = Int((collectionView.contentOffset.x + collectionView.bounds.width * 0.5) / collectionView.bounds.width)
         index %= images.count
         pageControl.currentPage = index
     }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+
+    func scrollViewWillBeginDragging(_: UIScrollView) {
         removeTimer()
     }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+
+    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {
         startTimer()
     }
-    
 }
