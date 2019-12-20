@@ -11,6 +11,8 @@ import UIKit
 class CycleScrollView: UIView {
     
     static let cellId = "cellId"
+    
+    
     @objc var timeInterval: TimeInterval = 4.0
     @objc var timer: Timer?
     private var index: Int = 0
